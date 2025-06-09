@@ -1,0 +1,60 @@
+-- SQL Project Questions
+--Show Customers (their full names, customer ID, and country) who are not in the US. (Hint: != or <> can be used to say "is not equal to").
+--basic query to see what info is in the table
+SELECT * 
+FROM customers
+LIMIT 25;
+
+SELECt FirstName, LastName, CustomerId, Country
+FROM customers
+WHERE Country <> "USA"
+
+--Show only the Customers from Brazil.
+SELECT FirstName, LastName, Country
+FROM customers
+WHERE Country = "Brazil";
+
+--Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.
+--general query of invoices table to see info 
+SELECT *
+FROM invoices 
+LIMIT 7;
+
+----general query of invoices table to see info
+SELECT *
+FROM customers 
+LIMIT 7;
+
+--Answer to the question
+SELECT customers.FirstName, customers.LastName, invoices.InvoiceId, invoices.InvoiceDate, invoices.BillingCountry
+FROM customers
+LEFT JOIN invoices
+ON customers.CustomerId = invoices.CustomerId
+WHERE invoices.BillingCountry = "Brazil";
+
+
+--Show the Employees who are Sales Agents.
+--general query of employees table to see info
+SELECT *
+FROM employees 
+LIMIT 25;
+
+SELECT FirstName, LastName, Title
+FROM employees
+WHERE Title LIKE "%sales%";
+
+--OR 
+
+SELECT FirstName, LastName, Title
+FROM employees
+WHERE Title = "Sales Support Agent";
+
+
+--Find a unique/distinct list of billing countries from the Invoice table.
+--general query of invoices table to see info 
+SELECT *
+FROM invoices 
+LIMIT 7;
+
+SELECT DISTINCT BillingCountry
+FROM invoices 
